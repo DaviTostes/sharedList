@@ -2,7 +2,7 @@ import express from "express";
 import userRoute from "./routes/userRoute";
 
 const app = express()
-const port = 8080
+const port = 80
 
 app.use(express.json())
 
