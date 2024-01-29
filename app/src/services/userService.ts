@@ -1,13 +1,20 @@
 import axios from "axios";
-import User from "../interfaces/user";
+import { User, UserLogin } from "../interfaces/user";
 
 export default class UserService {
-    private readonly apiUrl = "https://shared-list-api.vercel.app/"
+    private readonly apiUrl
 
-    constructor() {}
+    constructor(apiUrl: string) {
+        this.apiUrl = apiUrl
+    }
 
     async Create(user: User) {
         const result = await axios.post(this.apiUrl+"user", user)
+        return result.data
+    }
+
+    async Login(login: UserLogin) {
+        const result = await axios.post(this.apiUrl+"user/login", login)
         return result.data
     }
 }

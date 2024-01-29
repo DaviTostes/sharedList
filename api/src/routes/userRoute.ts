@@ -22,10 +22,12 @@ router.post('/', async (req, res) => {
 
     if(validate === false) {
         var result = await service.userService.Create(user)
-        res.json(createMessage(result, {}))
+        
+        if(result.includes('Successo')) res.status(200).json(createMessage(result, {}))
+        else res.status(500).json(createMessage(result, {}))
     }
     else {
-        res.json(createMessage("Há um campo faltando", `campo "${validate}" faltando`))
+        res.status(400).json(createMessage("Há um campo faltando", `campo "${validate}" faltando`))
     }
 })
 
@@ -39,10 +41,12 @@ router.post('/login', async (req, res) => {
 
     if(validate === false) {
         var result = await service.userService.Login(login)
-        res.json(createMessage(result, {}))
+
+        if(result.includes('autorizado')) res.status(200).json(createMessage(result, {}))
+        else res.status(500).json(createMessage(result, {}))
     }
     else {
-        res.json(createMessage("Há um campo faltando", `campo "${validate}" faltando`))
+        res.status(400).json(createMessage("Há um campo faltando", `campo "${validate}" faltando`))
     }
 })
 

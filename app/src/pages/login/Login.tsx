@@ -4,13 +4,25 @@ import styles from "./styles";
 import { useState } from "react";
 import globalStyles from "../../styles/globalStyles";
 import theme from "../../themes/theme";
+import UnitOfService from "../../services/unitOfService";
+import { UserLogin } from "../../interfaces/user";
 
 export default function Login({navigation} : any) {
-    let [username, setUsername] = useState('')
-    let [password, setPassword] = useState('')
+    const service = new UnitOfService()
+    let [login, setLogin] = useState<UserLogin>({
+        email: '',
+        password: ''
+    })
 
-    const handleLogin = () => {
-        alert('oi')
+    const handleLogin = async () => {
+        var result = await service.userService.Login(login)
+
+        if(result.includes('autorizado')) {
+            navigation.navigate('Home')
+        }
+        else {
+            alert(result.message)
+        }
     }
 
     return (
@@ -30,14 +42,14 @@ export default function Login({navigation} : any) {
                     style={globalStyles.input} 
                     placeholder="Email ou usuário..."
                     placeholderTextColor={theme.colors.background}
-                    onChangeText={(text) => setUsername(text)}
-                    value={username}
+                    onChangeText={(text) => setLogin({...login, email: text})}
+                    value={login.email}
                 />
                 <Text style={globalStyles.formText}>Senha:</Text>
                 <TextInput 
                     style={globalStyles.input} 
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
+                    onChangeText={(text) => setLogin({...login, password: text})}
+                    value={login.password}
                 />
                 <View style={styles.enterContainer}>
                     <Text style={styles.link}>Esqueci minha senha</Text>
