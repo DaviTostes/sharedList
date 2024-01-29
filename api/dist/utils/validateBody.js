@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 function validateBody(obj) {
     for (let key in obj) {
-        if (obj[key] === undefined) {
+        if (obj[key] === undefined || obj[key] === '') {
             return key;
         }
     }

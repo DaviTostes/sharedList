@@ -18,9 +18,26 @@ class UserService {
             try {
                 const userExists = yield (0, firestore_1.getDoc)((0, firestore_1.doc)(firebase_1.db, `Users/${user.email}`));
                 if (userExists.exists())
-                    return "Email já cadastrado";
+                    return "Email já cadastrado...";
                 yield (0, firestore_1.setDoc)((0, firestore_1.doc)((0, firestore_1.collection)(firebase_1.db, `Users`), user.email), user);
                 return 'Sucesso ao cadastrar usuário';
+            }
+            catch (ex) {
+                console.log(ex);
+                return 'Erro';
+            }
+        });
+    }
+    Login(login) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userExists = yield (0, firestore_1.getDoc)((0, firestore_1.doc)(firebase_1.db, `Users/${login.email}`));
+                if (!userExists.exists())
+                    return 'Nenhum usuário encontrado...';
+                if (userExists.data()['password'] === login.password) {
+                    return 'Login autorizado';
+                }
+                return 'Senha incorreta';
             }
             catch (ex) {
                 console.log(ex);

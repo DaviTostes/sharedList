@@ -1,7 +1,6 @@
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { User, UserLogin } from "../interfaces/user";
-import { log } from "console";
 
 export class UserService {
     async Create(user: User) {

@@ -30,10 +30,30 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var validate = (0, validateBody_1.default)(user);
     if (validate === false) {
         var result = yield service.userService.Create(user);
-        res.json((0, createJson_1.default)(result, {}));
+        if (result.includes('Sucesso'))
+            res.status(200).json((0, createJson_1.default)(result, {}));
+        else
+            res.status(400).json((0, createJson_1.default)(result, {}));
     }
     else {
-        res.json((0, createJson_1.default)("Há um campo faltando", `campo "${validate}" faltando`));
+        res.status(500).json((0, createJson_1.default)("Há um campo faltando", `campo "${validate}" faltando`));
+    }
+}));
+router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const login = {
+        email: req.body.email,
+        password: req.body.password
+    };
+    var validate = (0, validateBody_1.default)(login);
+    if (validate === false) {
+        var result = yield service.userService.Login(login);
+        if (result.includes('autorizado'))
+            res.status(200).json((0, createJson_1.default)(result, {}));
+        else
+            res.status(400).json((0, createJson_1.default)(result, {}));
+    }
+    else {
+        res.status(500).json((0, createJson_1.default)("Há um campo faltando", `campo "${validate}" faltando`));
     }
 }));
 exports.default = router;

@@ -15,14 +15,10 @@ export default function Login({navigation} : any) {
     })
 
     const handleLogin = async () => {
-        var result = await service.userService.Login(login)
+        const result = await service.userService.Login(login)
 
-        if(result.includes('autorizado')) {
-            navigation.navigate('Home')
-        }
-        else {
-            alert(result.message)
-        }
+        if(result.message.includes('autorizado')) navigation.navigate('Home')
+        else alert(result.message)
     }
 
     return (

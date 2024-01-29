@@ -5,16 +5,26 @@ export default class UserService {
     private readonly apiUrl
 
     constructor(apiUrl: string) {
-        this.apiUrl = apiUrl
+        this.apiUrl = apiUrl+"user/"
     }
 
     async Create(user: User) {
-        const result = await axios.post(this.apiUrl+"user", user)
-        return result.data
+        try {
+            const result = await axios.post(this.apiUrl, user)
+            return result.data
+        }
+        catch(ex) {
+            console.log(ex)
+        }
     }
 
     async Login(login: UserLogin) {
-        const result = await axios.post(this.apiUrl+"user/login", login)
-        return result.data
+        try {
+            const result = await axios.post(this.apiUrl+"login", login)
+            return result.data
+        }
+        catch(ex) {
+            console.log(ex)
+        }
     }
 }
