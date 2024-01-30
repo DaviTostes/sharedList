@@ -1,6 +1,6 @@
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { and, collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { User, UserLogin } from "../interfaces/user";
+import { ReadUserDTO, User, UserLogin } from "../interfaces/user";
 
 export class UserService {
     async Create(user: User) {
@@ -33,6 +33,32 @@ export class UserService {
         catch(ex) {
             console.log(ex)
             return 'Erro'
+        }
+    }
+
+    async FindByName(name: string) {
+        try {
+            
+            const q = await getDocs(query(collection(db, 'Users')))
+            
+            if(q.size === 0) return []
+
+            const users: ReadUserDTO[] = []
+
+            q.forEach(doc => {
+                if(doc.data()['username'].includes(name)) {
+                    users.push({
+                        email: doc.data()['email'],
+                        username: doc.data()['username']
+                    })
+                }
+            })
+
+            return users
+        }
+        catch(ex) {
+            console.log(ex)
+            return []
         }
     }
 }

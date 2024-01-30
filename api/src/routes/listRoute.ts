@@ -14,10 +14,10 @@ router.post('/', async (req, res) => {
         users: req.body.users
     }
 
-    var validate = validateBody(list)
+    const validate = validateBody(list)
 
     if(validate === false) {
-        var result = await service.listService.Create(list)
+        const result = await service.listService.Create(list)
         
         if(result.includes('Sucesso')) res.status(200).json(createMessage(result, {}))
         else res.status(400).json(createMessage(result, {}))
