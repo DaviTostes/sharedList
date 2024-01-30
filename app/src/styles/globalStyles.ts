@@ -58,7 +58,7 @@ const globalStyles = StyleSheet.create({
     button: {
         backgroundColor: theme.colors.button,
         borderRadius: 15,
-        width: 120,
+        width: 100,
         height: 40,
         alignItems: "center",
         justifyContent: "center",
@@ -68,6 +68,25 @@ const globalStyles = StyleSheet.create({
         shadowOffset: { height: 3, width: 5},
         elevation: 6,
     },
+
+    bigButton: {
+        height: 50
+    },
+    
+    roundButton: {
+        backgroundColor: theme.colors.button,
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        shadowColor: "#000",
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        shadowOffset: { height: 3, width: 5},
+        elevation: 6
+    },
+
 
     buttonText: {
         color: "#fff",

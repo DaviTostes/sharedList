@@ -5,6 +5,7 @@ import { useFonts, Inter_700Bold } from '@expo-google-fonts/inter';
 import Register from './src/pages/register/Register';
 import Success from './src/pages/success/Success';
 import Home from './src/pages/home/Home';
+import CreateList from './src/pages/create-list/CreateList';
 
 const Stack = createNativeStackNavigator()
 
@@ -24,6 +25,7 @@ if (!fontsLoaded && !fontError) {
         <Stack.Screen name='Register' component={Register}/>
         <Stack.Screen name='Success' component={Success}/>
         <Stack.Screen name='Home' component={Home}/>
+        <Stack.Screen name='CreateList' component={CreateList}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { User, UserLogin } from "../interfaces/user";
+import Message from "../interfaces/message";
 
 export default class UserService {
     private readonly apiUrl
@@ -9,22 +10,28 @@ export default class UserService {
     }
 
     async Create(user: User) {
-        try {
-            const result = await axios.post(this.apiUrl, user)
-            return result.data
-        }
-        catch(ex) {
-            console.log(ex)
-        }
+        var result : Message = await axios.post(this.apiUrl, user)
+        .then((response: AxiosResponse) => {
+            return response.data
+        })
+        .catch((error: AxiosError) => {
+            if(error.response) return error.response.data
+            else if(error.request) return error.request.data
+        })
+
+        return result
     }
 
     async Login(login: UserLogin) {
-        try {
-            const result = await axios.post(this.apiUrl+"login", login)
-            return result.data
-        }
-        catch(ex) {
-            console.log(ex)
-        }
+        var result : Message = await axios.post(this.apiUrl+"login", login)
+        .then((response: AxiosResponse) => {
+            return response.data
+        })
+        .catch((error: AxiosError) => {
+            if(error.response) return error.response.data
+            else if(error.request) return error.request.data
+        })
+
+        return result
     }
 }

@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, Keyboard } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import styles from "./styles";
 import { useState } from "react";
@@ -17,33 +17,35 @@ export default function Login({navigation} : any) {
     const handleLogin = async () => {
         const result = await service.userService.Login(login)
 
-        if(result.message.includes('autorizado')) navigation.navigate('Home')
+        if(result.message?.includes('autorizado')) navigation.navigate('Home')
         else alert(result.message)
+
+        Keyboard.dismiss()
     }
 
     return (
         <View style={globalStyles.container}>
-            <Image 
+            <Image
                 source={require("../../../assets/waveLeft.png")}
                 style={globalStyles.wave}
             />
-            <Image 
+            <Image
                 source={require("../../../assets/logo.png")}
                 style={globalStyles.logo}
             />
             <Text style={globalStyles.title}>Entre na sua conta:</Text>
             <View style={globalStyles.formContainer}>
                 <Text style={globalStyles.formText}>Login:</Text>
-                <TextInput 
-                    style={globalStyles.input} 
+                <TextInput
+                    style={globalStyles.input}
                     placeholder="Email ou usuário..."
                     placeholderTextColor={theme.colors.background}
                     onChangeText={(text) => setLogin({...login, email: text})}
                     value={login.email}
                 />
                 <Text style={globalStyles.formText}>Senha:</Text>
-                <TextInput 
-                    style={globalStyles.input} 
+                <TextInput
+                    style={globalStyles.input}
                     onChangeText={(text) => setLogin({...login, password: text})}
                     value={login.password}
                 />

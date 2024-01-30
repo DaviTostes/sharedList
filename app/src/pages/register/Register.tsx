@@ -3,7 +3,7 @@ import globalStyles from "../../styles/globalStyles";
 import { useState } from "react";
 import styles from "./styles";
 import theme from "../../themes/theme";
-import User from "../../interfaces/user";
+import { User } from "../../interfaces/user";
 import UnitOfService from "../../services/unitOfService";
 
 export default function Register({navigation}: any) {
