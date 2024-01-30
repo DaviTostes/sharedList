@@ -7,7 +7,7 @@ export class UserService {
         try {
             const userExists = await getDoc(doc(db, `Users/${user.email}`))
 
-            if(userExists.exists()) return "Email já cadastrado..."
+            if(userExists.exists()) return "Email já cadastrado"
 
             await setDoc(doc(collection(db, `Users`), user.email), user)
 
@@ -23,7 +23,7 @@ export class UserService {
         try {
             const userExists = await getDoc(doc(db, `Users/${login.email}`))
 
-            if(!userExists.exists()) return 'Nenhum usuário encontrado...'
+            if(!userExists.exists()) return 'Nenhum usuário encontrado'
 
             if(userExists.data()['password'] === login.password) {
                 return 'Login autorizado'

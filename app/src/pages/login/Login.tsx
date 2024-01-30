@@ -15,12 +15,13 @@ export default function Login({navigation} : any) {
     })
 
     const handleLogin = async () => {
+        Keyboard.dismiss()
+        
         const result = await service.userService.Login(login)
 
         if(result.message?.includes('autorizado')) navigation.navigate('Home')
         else alert(result.message)
 
-        Keyboard.dismiss()
     }
 
     return (

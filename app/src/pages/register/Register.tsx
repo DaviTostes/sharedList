@@ -17,6 +17,8 @@ export default function Register({navigation}: any) {
     })
 
     const handleRegister = async () => {
+        Keyboard.dismiss()
+        
         if(user.password === '') {
             alert('Senha em branco...')
             return
@@ -32,7 +34,6 @@ export default function Register({navigation}: any) {
         if(result.message.includes("Sucesso")) navigation.navigate('Success')
         else alert(result.message)
 
-        Keyboard.dismiss()
     }
 
     const handleStep = () => {
