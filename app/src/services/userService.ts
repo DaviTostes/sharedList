@@ -34,4 +34,17 @@ export default class UserService {
 
         return result
     }
+
+    async FindByName(name: string) {
+        var result : Message = await axios.get(this.apiUrl+"/"+name)
+        .then((response: AxiosResponse) => {
+            return response.data
+        })
+        .catch((error: AxiosError) => {
+            if(error.response) return error.response.data
+            else if(error.request) return error.request.data
+        })
+
+        return result
+    }
 }

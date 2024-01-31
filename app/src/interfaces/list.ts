@@ -1,4 +1,4 @@
-export default interface CreateListDTO {
+export interface CreateListDto {
     name: string,
     authority: string,
     obs: string,

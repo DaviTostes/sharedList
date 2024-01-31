@@ -8,3 +8,8 @@ export interface UserLogin {
     email: string,
     password: string
 }
+
+export interface ReadUserDto {
+    email: string,
+    username: string
+}

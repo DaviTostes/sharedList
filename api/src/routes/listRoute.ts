@@ -11,6 +11,7 @@ router.post('/', async (req, res) => {
     const list: CreateListDTO = {
         name: req.body.name,
         authority: req.body.authority,
+        obs: req.body.obs,
         users: req.body.users
     }
 
